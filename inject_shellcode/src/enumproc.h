@@ -45,7 +45,9 @@ HANDLE find_running_process(LPWSTR searchedName)
     // Search handle to the process of defined name.
     for ( i = 0; i < cProcesses; i++ ) {
         if( aProcesses[i] != 0 ) {
+            // We check whether a given process meets the conditions we are looking for:
             if (is_searched_process(aProcesses[i], searchedName)) {
+                // If so, open the handle to it:
                 HANDLE hProcess = OpenProcess( PROCESS_ALL_ACCESS, FALSE, aProcesses[i]);
                 return hProcess;
             }
