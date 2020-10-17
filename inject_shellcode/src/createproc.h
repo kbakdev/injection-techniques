@@ -3,12 +3,14 @@
 
 bool create_new_process1(PROCESS_INFORMATION &pi, LPWSTR cmdLine, LPWSTR startDir = NULL)
 {
+    // Prepare a structure that will be filled with data about the running process:
     STARTUPINFO si;
     memset(&si, 0, sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
 
     memset(&pi, 0, sizeof(PROCESS_INFORMATION));
-
+    
+    // Call a function that creates a new process - it will be suspended.
     if (!CreateProcess(
             NULL,
             cmdLine,
@@ -25,7 +27,7 @@ bool create_new_process1(PROCESS_INFORMATION &pi, LPWSTR cmdLine, LPWSTR startDi
         printf("[ERROR] CreateProcess failed, Error = %x\n", GetLastError());
         return false;
     }
-    return true;
+    return true; // yee, itz workin'
 }
 
 bool create_new_process2(PROCESS_INFORMATION &pi, LPWSTR cmdLine, LPWSTR startDir = NULL)
