@@ -19,13 +19,16 @@ bool run_shellcode_in_new_thread1(HANDLE hProcess, LPVOID remote_shellcode_ptr)
 
     DWORD threadId = NULL;
     HANDLE hMyThread = NULL;
+    // Create a new thread where the injected code runs:
     if ((hMyThread = CreateRemoteThread(hProcess, NULL, NULL, routine, NULL, CREATE_SUSPENDED, &threadId)) == NULL) {
         printf("[ERROR] CreateRemoteThread failed, status : %x\n", GetLastError());
+        // Failed to.
         return false;
     }
     printf("Created Thread, id = %x\n", threadId);
     printf("Resuming added thread...\n");
-    ResumeThread(hMyThread); //injected code
+    // Resume thread:
+    ResumeThread(hMyThread); // Injected code.
     return true;
 }
 
