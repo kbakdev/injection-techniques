@@ -11,6 +11,7 @@ bool add_shellcode_to_apc(HANDLE hThread, LPVOID remote_shellcode_ptr)
     printf("Adding shellcode to the queue\n");
     NTSTATUS status = NULL;
     
+    // Add shellcode entry point to the queue:
     if ((status = NtQueueApcThread(hThread, remote_shellcode_ptr, 0, 0, 0)) != STATUS_SUCCESS)
     {
         printf("[ERROR] NtQueueApcThread failed, status : %x\n", status);
